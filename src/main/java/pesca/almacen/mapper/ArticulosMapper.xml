@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pesca.almacen.mapper.ArticulosMapper">
+	<cache />
+	<select id="buscarListadoArticulos" resultType="pesca.almacen.dto.ArticulosDto">
+		SELECT * FROM articulos
+	</select>
+	
+	<select id="buscarArticulo" parameterType="pesca.almacen.dto.ArticulosDto" resultType="pesca.almacen.dto.ArticulosDto">
+		SELECT * FROM articulos WHERE nombre=#{nombre} and talla=#{talla}
+	</select>
+	
+	<select id="getExistencias" parameterType="pesca.almacen.dto.ArticulosDto" resultType="java.lang.Integer">
+		SELECT unidades FROM articulos WHERE nombre=#{nombre} and talla=#{talla}
+	</select>
+	
+	<insert id="insertarArticulo" parameterType="pesca.almacen.dto.ArticulosDto">
+		INSERT INTO articulos (nombre,talla,unidades,segundaMano) VALUES (#{nombre},#{talla},#{unidades},#{segundaMano})
+	</insert>
+	
+	<update id="actualizarArticulo" parameterType="pesca.almacen.dto.ArticulosDto">
+		UPDATE articulos SET unidades=#{unidades} WHERE nombre=#{nombre} and talla=#{talla}
+	</update>
+	
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- indicamos cual va a ser el directorio del cual van a cargar archivos como .js .css -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Bean necesario para que nuestro controlador sepa en que directorio se encuentran los archivos .jsp que se van a mostrat-->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- indicamos cual va a ser el controller de nuestra aplicacion -->
+	<context:component-scan base-package="pesca.almacen.controller" />	
+	
+	<!-- Bean necesario para la traduccion i18n en los archivos .jsp -->
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:i18n/validation" />
+		<beans:property name="useCodeAsDefaultMessage" value="true" />
+	</beans:bean>
+	
+</beans:beans>
